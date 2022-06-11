@@ -7,7 +7,7 @@ while (prenda != "") {
 
         case "REMERA":
             const cantidad = prompt("Cuantas quiere llevar? Llevando 2 o mas accederas a descuentos");
-            if (cantidad > 2) {
+            if (cantidad >= 2) {
                 alert(descuento);
                 prenda = "";
             } else {
