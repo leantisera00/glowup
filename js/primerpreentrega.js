@@ -1,5 +1,7 @@
 const IVA = 1.21;
 let totalcompra = 0;
+const prendas = ["remera", "buzo","pantalon"]
+const precios = [1500,4500,3000]
 
 
 class Producto {
@@ -12,9 +14,9 @@ class Producto {
   }
 }
 
-const producto1 = new Producto("remera", 1500);
-const producto2 = new Producto("buzo", 4500);
-const producto3 = new Producto("babucha", 2700);
+const producto1 = new Producto((prendas[0]), (precios[0]));
+const producto2 = new Producto((prendas[1]), (precios[1]));
+const producto3 = new Producto((prendas[2]), (precios[2]));
 
 function confirmarCompra() {
   const respuesta = prompt("¿Desea comprar algo?\n1) Si \n2) No");
