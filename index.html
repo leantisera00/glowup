@@ -1,72 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="./public/css/style.css">
-<title>GLOW UP Ropa Deportiva</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/73cdce8bb8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/main.js" async></script>
+    <title>GLOW UP ropa deportiva</title>
 </head>
-<body class="container-fluid">
-    <header class="row">
-        <nav><a class="col-2" href="./index.html"> <img src="./public/img/glowuplogo.png" alt="Logo Glow Up"></a>
-            <ul class="menu_navbar col-9">
-                <li> <a class="navbar__contenido" href="./index.html">INICIO</a></li>
-                <li> <a class="navbar__contenido" href="#productos">PRODUCTOS</a></li>
-                <li> <a class="navbar__contenido" href="#contacto">CONTACTO</a></li>
-                <li> <a class="navbar__contenido" href="#comocomprar">¿COMO COMPRAR?</a></li>
-            </ul>
-            <a class="carrito col-1" href="./index.html"> <img class="carritoLogo" src="./public/img/CARRITO DE COMPRAS.png" alt="Carrito de compras"></a>
-        </nav>
+
+<body>
+
+    <header>
+        <div id="contHeader">
+            <div id="contMarca">
+                <a href="./index.html" id="linkLogo">
+                    <img src="./img/Logo.png" alt="Logo" id="logo">
+                    <h1>GLOW UP Ropa Deportiva</h1>
+                </a>
+            </div>
+            <div id="contenedorCarrito">
+                <a id="linkCarrito" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">
+                    <img src="./img/Carrito.png" alt="Carrito de compras" id="imgCarrito">
+                </a>
+                <span id="contadorCarrito"></span>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                    aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h3 class="offcanvas-title" id="offcanvasRightLabel">Carrito de compra
+                        </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div id="itemsCarrito">
+                        </div>
+                        <p class="Total">Precio total: $<span id="precioTotal">0</span></p>
+                        <button class="btn-finalizar" id="btn-finalizar" data-bs-dismiss="offcanvas">Finalizar
+                            compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
-    <main>
-        <section class="row">
-        <h2 class="marcas col-12"><i>MARCAS</i></h2>
-        <div>
-        <ul class="marcasLista col-12">
-            <li><img src="public/img/Logo_NIKE 1.png"></img></li>
-            <li><img src="public/img/Logo_Adidas 1.png"></img></li>
-            <li><img src="public/img/logo_fila.png"></img></li>
-            <li><img src="public/img/logo_puma.png"></img></li>
-        </ul>
+    <div id="wrapper">
+        <aside id="aside">
+
+            <input id="barraBusqueda" placeholder="Buscar por nombre">
+
+            <section id="contFiltros">
+                <article>
+                    <form id="Checkbox">
+                        <fieldset class="filtros">
+                            <legend>Categorías:</legend>
+                            <label for="Remera_Nike_Hombre">
+                                <input type="checkbox" id="Remera_Nike_Hombre" name="producto" value="Remera_Nike_Hombre">
+                                Remera Nike Hombre
+                            </label>
+                            <label for="Remera_Adidas_Hombre">
+                                <input type="checkbox" id="Remera_Adidas_Hombre" name="producto" value="Remera_Adidas_Hombre">
+                                Remera Adidas Hombre
+                            </label>
+                            <label for="Babucha_Nike">
+                                <input type="checkbox" id="Babucha_Nike" name="producto" value="Babucha_Nike">
+                                Babucha Nike Hombre
+                            </label>
+                            <label for="Buzo_Adidas">
+                                <input type="checkbox" id="Buzo_Adidas" name="producto" value="Buzo_Adidas">
+                                Buzo Adidas Hombre
+                            </label>
+                            <label for="Remera_Adidas_Mujer">
+                                <input type="checkbox" id="Remera_Adidas_Mujer" name="producto" value="Remera_Adidas_Mujer">
+                                Remera Adidas Mujer
+                            </label>
+                            <label for="Remera_Nike_Mujer">
+                                <input type="checkbox" id="Remera_Nike_Mujer" name="producto" value="Remera_Nike_Mujer">
+                                Remera Adidas Mujer
+                            </label>
+                            <label for="calza_nike_mujer">
+                                <input type="checkbox" id="calza_nike_mujer" name="producto" value="calza_nike_mujer">
+                                Calza Nike Mujer
+                            </label>
+                            <button class="btn-accion btn-filtro" type="submit" id="btn-filtrar">Aplicar</button>
+                        </fieldset>
+                    </form>
+                </article>
+            </section>
+        </aside>
+
+        <main id="main">
+            <button id="toTop"><img src="./img/up-arrow.png" id="img-toTop"></button>
+            <h2 class="subtSeccion">Productos destacados</h2>
+            <section class="SecMain">
+            </section>
+        </main>
+
+        <footer>
+            <div id="contSocial">
+                <div id="footContacto">
+                    <h3>Contactanos</h3>
+                    <p>1234-5678</p>
+                    <p><a href="#">glowupropadeportiva@gmail.com</a></p>
+                    <p>Calle Catamarca 730</p>
+                </div>
+
+                <div id="footRedes">
+                    <h3>Seguinos</h3>
+                    <div id="Container_Redes">
+                        <a href="#"><img src="./img/facebook.png" alt="Logo de facebook" class="logosRedes"></a>
+                        <a href="#"><img src="./img/instagram.png" alt="Logo de instagram" class="logosRedes"></a>
+                        <a href="#"><img src="./img/tiktok.png" alt="Logo de TikTok" class="logosRedes"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="footCopy">
+                <p>Copyright &copy; Glow Up ropa deportiva 2022</p>
+            </div>
+        </footer>
     </div>
-    </section>
-    <section class="row destacados">
-    <h1 class="destacadosTitulo col-12"><u>DESTACADOS</u></h1>
-    <div>
-    <ul class="modaNike col-12">
-    <li><img src="public/img/Logo_NIKE 1.png" alt=""></li>
-    <li><img class="modaFoto" src="public/img/nike1.png" alt=""></li>
-    <li><img class="modaFoto" src="public/img/nike2.png" alt=""></li>
-    <li><img class="modaFoto" src="public/img/nike3.png" alt=""></li>
-    <li><img class="modaFoto" src="public/img/nike4.png" alt=""></li></ul>
-</div>
-<div>
-    <ul class="modaAdidas">
-    <li><img src="public/img/Logo_Adidas 1.png" alt=""></li>
-    <li><img class="modaFoto" src="public/img/adidas1.png" alt=""></li>
-    <li><img class="modaFoto" src="public/img/adidas2.png" alt=""></li>
-    <li><img class="modaFoto" src="public/img/adidas3.png" alt=""></li>
-    <li><img class="modaFoto"src="public/img/adidas4.png" alt=""></li></ul>
-</div>
-
-</section>
-    </main>
-<footer class="row">
-    <h3 class="derechos col-4">© 2022 GLOW UP S.R.L. - All Rights Reserved</h3>
-
-    <h2 class="seguinos col-3"><i>¡SEGUINOS!</i></h2>
-    <ul class="col-5 redes">
-        <li><img src="public/img/redlogo.png" alt=""></li>
-    <li><img src="public/img/logo_instagram.png" alt=""></li>
-    <li><img src="public/img/facebook logo.png" alt=""></li>
-    <li><img src="public/img/logo_tiktok.png" alt=""></li></ul>
-</footer>
-    
-
-<script src="js/primerpreentrega.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
