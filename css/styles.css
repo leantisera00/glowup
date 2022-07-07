@@ -31,6 +31,12 @@ a {
 
 }
 
+#wrapperCompra {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
 /******* HEADER ********/
 
 header {
@@ -79,8 +85,6 @@ header div {
 }
 
 #imgCarrito {
-    /*width: 35px;
-    height: 35px;*/
     width: 30px;
     height: 30px;
 }
@@ -137,6 +141,11 @@ header div {
 .imgProdCarrito {
     width: 100px;
     height: 100px;
+}
+
+#contHeaderFinal {
+    display: flex;
+    justify-content: center;
 }
 
 /******* ASIDE ********/
@@ -264,7 +273,17 @@ section {
     height: 30px;
 }
 
+.mensajeCarritoVacio {
+    text-align: center;
+    font-size: 2rem;
+}
+
 .btn-comprar:disabled {
+    background-color: white;
+    color: black;
+}
+
+#btn-finalizar:disabled {
     background-color: white;
     color: black;
 }
@@ -284,6 +303,81 @@ section {
 .mensajeCompra {
     font-size: 3rem;
 }
+
+#mainFinal {
+    display: flex;
+    flex-direction: column;
+}
+
+.TotalResumen {
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: flex;
+    align-self: center;
+    border-left: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    padding: 5px;
+}
+
+#secResumenCompra {
+    text-align: center;
+    margin: auto;
+}
+
+.resumenCarrito {
+    font-size: 1.3rem;
+    padding: 8px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+    column-gap: 5%;
+    width: 100%;
+
+}
+
+.nombreProdResumen {
+    width: 40%;
+}
+
+.cantProdResumen,
+.precioProdResumen {
+    width: 50px;
+}
+
+#formCompra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#confirmarCompra {
+    font-size: 1.2rem;
+}
+
+.imgProdResumen {
+    width: 50px;
+    height: 50px;
+}
+
+#TituloformCompra {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 30px;
+    border-bottom: 1px solid black;
+    width: 50%;
+}
+
+.inputDatos {
+    width: 150px;
+    margin-bottom: 15px;
+    padding-left: 5px;
+}
+
 
 /******* FOOTER ********/
 
@@ -366,6 +460,94 @@ footer div {
 
 }
 
+@media only screen and (min-width: 768px) {
+
+    .SecMain {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 20px;
+    }
+
+    .contProducto {
+        width: 350px;
+    }
+
+    #contFiltros article {
+        display: flex;
+        flex-direction: row;
+        column-gap: 200px;
+    }
+
+    #contSocial {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #footContacto,
+    #footRedes {
+        border-bottom: none;
+    }
+
+    .TotalResumen {
+        font-size: 2rem;
+    }
+
+    .resumenCarrito {
+        width: 100%;
+        justify-content: space-between;
+        font-size: 1.8rem;
+    }
+
+    #footerCompraFinal {
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    .subtSeccion {
+        font-size: 2.5rem;
+    }
+
+    #TituloformCompra {
+        margin-top: 50px;
+        width: 40%;
+        font-size: 2rem;
+    }
+
+    #formCompra {
+        font-size: 1.8rem;
+    }
+
+    .inputDatos {
+        width: 35%;
+        padding-left: 8px;
+    }
+
+    #confirmarCompra {
+        font-size: 1.5rem;
+    }
+
+    .mensajeCompra {
+        font-size: 2.8rem;
+        width: 100%;
+    }
+
+    #secResumenCompra {
+        width: 90%;
+    }
+
+    .nombreProdResumen {
+        width: 40%;
+    }
+
+    .cantProdResumen,
+    .precioProdResumen {
+        width: 80px;
+    }
+
+}
+
 @media only screen and (min-width: 1024px) {
 
     body {
@@ -401,10 +583,9 @@ footer div {
         max-width: 1300px;
         margin: auto;
         grid-template-areas:
-            "header header"
             "aside main"
             "footer footer";
-        grid-template-rows: auto auto auto;
+        grid-template-rows: auto auto;
         grid-template-columns: 25% 75%;
     }
 
@@ -426,7 +607,7 @@ footer div {
     .contInfoProd {
         display: flex;
         flex-direction: column;
-        width: 40%;
+        width: 350px;
     }
 
     aside {
@@ -435,6 +616,41 @@ footer div {
 
     .contMensajeCompra {
         justify-content: space-evenly;
+    }
+
+    #wrapperCompraFinal {
+        max-width: 1300px;
+        margin: auto;
+        display: grid;
+        grid-template-areas: 'subtitulo'
+            'mainFinal';
+        background-color: white;
+        grid-template-rows: 80px 1fr;
+    }
+
+    #mainFinal {
+        grid-area: mainFinal;
+    }
+
+    .subtSeccion {
+        grid-area: subtitulo;
+    }
+
+    #secResumenCompra {
+        width: 90%;
+    }
+
+    .resumenCarrito {
+        justify-content: space-evenly;
+    }
+
+    .nombreProdResumen {
+        width: 30%;
+    }
+
+    .cantProdResumen,
+    .precioProdResumen {
+        width: 80px;
     }
 
 }
