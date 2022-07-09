@@ -1,8 +1,8 @@
-/////////////////////////// FUNCIONES ///////////////////////////
+// Funciones //
 
-/////////////////////////////////////
+
 //// Mostrar todos los productos ////
-/////////////////////////////////////
+
 
 function mostrarProductos(listaProd) {
     mainSec.innerHTML = ""
@@ -30,9 +30,9 @@ function mostrarProductos(listaProd) {
     });
 }
 
-////////////////////////////
+
 //// Carrito de compras ////
-////////////////////////////
+
 
 function agregarAlCarrito(e) {
     carrito.push(e.target.getAttribute('prodID'));
@@ -109,9 +109,9 @@ function vaciarCarrito() {
 
 btnVaciarCarrito.addEventListener('click', vaciarCarrito);
 
-///////////////////////
+
 //// Local Storage ////
-///////////////////////
+
 
 function guardarCarritoEnLocalStorage() {
     miLocalStorage.setItem('carrito', JSON.stringify(carrito));
@@ -124,9 +124,9 @@ function cargarCarritoDeLocalStorage() {
     }
 }
 
-//////////////////////////
+
 //// Finalizar compra ////
-//////////////////////////
+
 
 const main = document.querySelector('#main');
 const btnFinalizar = document.querySelector('#btn-finalizar');
@@ -140,9 +140,9 @@ btnFinalizar.onclick = () => {
     location.href = './pages/finalizarCompra.html';
 }
 
-//////////////////////////////////////
+
 /// Barra de busqueda de productos ///
-//////////////////////////////////////
+
 
 barraBuscar.addEventListener('input', () => {
     if (barraBuscar.value === '') {
@@ -153,9 +153,9 @@ barraBuscar.addEventListener('input', () => {
     }
 })
 
-////////////////////////////
+
 /// Filtros por checkbox ///
-////////////////////////////
+
 
 let btnFiltro = document.getElementById("btn-filtrar");
 
@@ -188,9 +188,8 @@ btnFiltro.onclick = (e) => {
     }
 };
 
-////////////////////////////////////////////////////
-//// Ir al inicio cuando hay scrolling vertical ////
-////////////////////////////////////////////////////
+
+// Ir al inicio cuando hay scrolling vertical //
 
 botonToTop = document.getElementById("toTop");
 
@@ -210,7 +209,7 @@ function irArriba() {
     document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
 }
 
-//////////////////////////////// PROGRAMA ////////////////////////////////
+//PROGRAMA //
 
 actualizarContadorCarrito();
 cargarCarritoDeLocalStorage();

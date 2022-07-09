@@ -4,7 +4,7 @@ const apellidoCliente = document.querySelector('#apellidoCliente');
 const emailCliente = document.querySelector('#emailCliente');
 const wrapperCompraFinal = document.querySelector('#wrapperCompraFinal');
 
-/////////////////////////// FUNCIONES ///////////////////////////
+// FUNCIONES //
 
 
 function cargarCarritoDeLocalStorage() {
@@ -64,7 +64,7 @@ function finalizarCompra() {
     localStorage.clear();
 }
 
-//////////////////////////////// PROGRAMA ////////////////////////////////
+// PROGRAMA //
 
 cargarCarritoDeLocalStorage()
 chequearLocalStorage()

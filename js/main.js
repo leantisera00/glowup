@@ -17,7 +17,7 @@ const imagenCarrito = document.querySelector('#contenedorCarrito');
 const wrapper = document.querySelector('#wrapper');
 
 
-/////////////////////////// CLASES ///////////////////////////
+// CLASES //
 
 class Producto {
     constructor(idprod, nombre, categoria, precio, imagen) {
@@ -30,7 +30,7 @@ class Producto {
 
 }
 
-/////////////////////////// OBJETOS ///////////////////////////
+// OBJETOS //
 
 const productos = [];
 productos.push(new Producto(1000, "Remera Nike Impossible Azul Hombre", "Remera_Nike_Hombre", 1800, "./img/Productos/remeras/remera_nike_azul.jpg"));
