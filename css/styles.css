@@ -551,7 +551,7 @@ footer div {
 @media only screen and (min-width: 1024px) {
 
     body {
-        background: linear-gradient(to bottom, rgb(255,255,255) 41%,rgb(255,255,255) 41%,rgb(0,0,0) 90%);
+        background: linear-gradient(to bottom, rgb(255, 255, 255) 41%, rgb(255, 255, 255) 41%, rgb(0, 0, 0) 90%);
         background-color: white;
     }
 

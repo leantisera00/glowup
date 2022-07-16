@@ -1,65 +1,240 @@
-/////////////////////////// GLOBAL ///////////////////////////
-
-let carrito = []
-const mainSec = document.querySelector(".SecMain");
-const barraBuscar = document.getElementById("barraBusqueda");
-const contadorCarrito = document.querySelector('#contadorCarrito');
-const contItemsCarrito = document.querySelector("#contItemsCarrito");
-const precioTotal = document.querySelector('#precioTotal');
-const pPrecioTotal = document.querySelector('.Total');
-const carritoBody = document.querySelector('.offcanvas-body');
-const btnVaciarCarrito = document.querySelector('#btnVaciar');
-const mensajeCarritoVacio = document.createElement('p');
-mensajeCarritoVacio.textContent = 'Tu carrito está vacío';
-mensajeCarritoVacio.classList.add('mensajeCarritoVacio');
-const miLocalStorage = window.localStorage;
-const imagenCarrito = document.querySelector('#contenedorCarrito');
-const wrapper = document.querySelector('#wrapper');
+// FUNCIONES //
 
 
-// CLASES //
+//// Mostrar todos los productos ////
 
-class Producto {
-    constructor(idprod, nombre, categoria, precio, imagen) {
-        this.idprod = idprod;
-        this.nombre = nombre.toUpperCase();
-        this.categoria = categoria;
-        this.precio = parseFloat(precio);
-        this.imagen = imagen;
-    }
 
+function mostrarProductos(listaProd) {
+    // Se crean contenedores con la info de cada producto
+    mainSec.innerHTML = ""
+    listaProd.forEach(prod => {
+        let contenedor = document.createElement("article");
+        contenedor.classList.add('contProducto');
+        contenedor.innerHTML = `
+                            <img src=${prod.imagen} alt=${prod.nombre} class="imgProd">
+                            <div class="contInfoProd">
+                            <p class="nombreProd">${prod.nombre}</p>
+                            <p class="precioProd">$${prod.precio}</p>
+                            </div>
+                            `;
+
+        const contInfoCompra = document.createElement('div');
+        contInfoCompra.classList.add('contInfoCompra');
+        mainSec.appendChild(contenedor);
+        contenedor.appendChild(contInfoCompra);
+        // Se crea un boton de comprar asignandole un tag imaginario, que tiene el id del producto seleccionado
+        const btnComprar = document.createElement('button');
+        btnComprar.classList.add('btn-comprar');
+        btnComprar.textContent = ('Comprar');
+        btnComprar.setAttribute('prodID', prod.idprod);
+        contInfoCompra.appendChild(btnComprar);
+        btnComprar.addEventListener('click', agregarAlCarrito);
+    });
 }
 
-// OBJETOS //
+//// Carrito de compras ////
 
-const productos = [];
-productos.push(new Producto(1000, "Remera Nike Impossible Azul Hombre", "Remera_Nike_Hombre", 1800, "./img/Productos/remeras/remera_nike_azul.jpg"));
-productos.push(new Producto(1001, "Remera Nike negra franja  blanca Hombre", "Remera_Nike_Hombre", 1800, "./img/Productos/remeras/remera_nike_cian_franjanegra.png"));
-productos.push(new Producto(1002, "Remera Nike Cian franja  negra Hombre", "Remera_Nike_Hombre", 1800, "./img/Productos/remeras/remera_nike_gris_franjablanca.png"));
-productos.push(new Producto(1003, "Remera Nike negra Hombre", "Remera_Nike_Hombre", 1800, "./img/Productos/remeras/remera_nike_negra.jpg"));
-productos.push(new Producto(2000, "Remera Adidas Rosa Hombre", "Remera_Adidas_Hombre", 1800, "./img/Productos/remeras/Remera_Adidas_rosa.png"));
-productos.push(new Producto(2001, "Remera Adidas Gris Hombre", "Remera_Adidas_Hombre", 1800, "./img/Productos/remeras/Remera_Adidas_gris.png"));
-productos.push(new Producto(2002, "Remera Adidas Blanca Hombre", "Remera_Adidas_Hombre", 1800, "./img/Productos/remeras/Remera_Adidas_blanca.jpg"));
-productos.push(new Producto(2003, "Remera Adidas Amarilla logo negro Hombre", "Remera_Adidas_Hombre", 1800, "./img/Productos/remeras/Remera_Adidas_amarilla_logonegro.png"));
-productos.push(new Producto(2004, "Remera Adidas Amarilla logo blanco Hombre", "Remera_Adidas_Hombre", 1800, "./img/Productos/remeras/remera_adidas_amarilla.jpg"));
-productos.push(new Producto(3000, "Babucha Nike frisada Negra franja lateral gris", "Babucha_Nike", 3000, "./img/Productos/babuchas/babucha_nike_negra.jpg"));
-productos.push(new Producto(3001, "Babucha Nike frisada Gris franja lateral negra", "Babucha_Nike", 3000, "./img/Productos/babuchas/babucha_nike_gris.png"));
-productos.push(new Producto(4000, "Buzo Adidas frisado con capucha gris", "Buzo_Adidas", 4500, "./img/Productos/buzos/buzo_adidas_gris.png"));
-productos.push(new Producto(4001, "Buzo Adidas frisado con capucha negro", "Buzo_Adidas", 4500, "./img/Productos/buzos/buzo_adidas_negro.png"));
-productos.push(new Producto(5000, "Remera Nike Impossible Mujer", "Remera_Nike_Mujer", 1800, "./img/Productos/remeras/nike_impossible_roja.png"));
-productos.push(new Producto(5001, "Remera Nike Retro Gris Mujer", "Remera_Nike_Mujer", 1800, "./img/Productos/remeras/retro_gris.png"));
-productos.push(new Producto(5002, "Remera Nike Retro Rosa Mujer", "Remera_Nike_Mujer", 1800, "./img/Productos/remeras/retro_rosa.png"));
-productos.push(new Producto(6000, "Remera Climalite Rosa Mujer", "Remera_Adidas_Mujer", 2100, "./img/Productos/remeras/climalite_rosa_intermedio.png"));
-productos.push(new Producto(6001, "Remera Climalite Rosa Claro Mujer", "Remera_Adidas_Mujer", 2100, "./img/Productos/remeras/climalite_rosaclaro.png"));
-productos.push(new Producto(7000, "Calza Gris Jaspeada Mujer", "calza_nike_mujer", 2500, "./img/Productos/calzas/calza_gris_jaspeada.png"));
-productos.push(new Producto(7001, "Calza Abstract Mujer", "calza_nike_mujer", 2500, "./img/Productos/calzas/calza_abstract.png"));
 
-function calcularTotal() {
-    return carrito.reduce((total, item) => {
-        const miItem = productos.filter((items) => {
-            return items.idprod === parseInt(item);
+function agregarAlCarrito(e) {
+    // Para agregar un producto al carro, se filtra por el valor del  prodID, que se asigno a cada botón de Comprar
+    let prodElegido = productos.filter(prd => prd.idprod == e.target.getAttribute('prodID'));
+    let nombreProdElegido = prodElegido[0].nombre;
+    mostrarToast(nombreProdElegido);
+    carrito.push(e.target.getAttribute('prodID'));
+    actualizarContadorCarrito()
+    mostrarCarrito();
+    verificarEstadoCarrito();
+    guardarCarritoEnLocalStorage();
+}
+
+function mostrarToast(prod) {
+    // Notificacion toast con el nombre del producto agregado al carrito
+    Toastify({
+        text: `PRODUCTO AGREGADO:
+                ${prod}`,
+        duration: 1000,
+        className: "toastAgregar",
+        offset: {
+            y: 80
+        },
+    }).showToast();
+}
+
+function mostrarCarrito() {
+    contItemsCarrito.textContent = '';
+    // Copia del array carrito y filtro duplicados, sumando cantidades a igual producto seleccionado
+    const carritoSinDuplicados = [...new Set(carrito)];
+    carritoSinDuplicados.forEach((item) => {
+        const miItem = productos.filter((prod) => {
+            return prod.idprod === parseInt(item);
         });
-        return total + miItem[0].precio;
-    }, 0);
+        const unidadesProd = carrito.reduce((total, itemId) => {
+            return itemId === item ? total += 1 : total;
+        }, 0);
+        let div = document.createElement('div')
+        div.setAttribute('class', 'productoEnCarrito')
+        div.innerHTML = `
+                        <img src=${miItem[0].imagen} alt=${miItem[0].nombre} class="imgProdCarrito">
+                        <p>${miItem[0].nombre}</p>
+                        <p>Cantidad: ${unidadesProd}</p>
+                        <p>Precio: $${miItem[0].precio}</p>
+                        `
+        const btnEliminar = document.createElement('button');
+        btnEliminar.classList.add('boton-eliminar', 'btn-danger');
+        btnEliminar.textContent = 'X';
+        btnEliminar.dataset.item = item;
+        btnEliminar.addEventListener('click', borrarItemCarrito);
+        div.appendChild(btnEliminar);
+        contItemsCarrito.appendChild(div);
+    })
+    actualizarContadorCarrito()
+    precioTotal.textContent = calcularTotal()
 }
 
+function borrarItemCarrito(e) {
+    // Filtro todos los productos que sean distintos al id del producto seleccionado para borrar
+    const id = e.target.dataset.item;
+    carrito = carrito.filter((carritoId) => {
+        return carritoId !== id;
+    });
+    mostrarCarrito();
+    verificarEstadoCarrito();
+    guardarCarritoEnLocalStorage();
+}
+
+function actualizarContadorCarrito() {
+    //  contador de los items del carrito
+    contadorCarrito.textContent = carrito.length;
+}
+
+function verificarEstadoCarrito() {
+    // Se verifica el estado del carrito
+    carrito.length == 0 ?
+        (
+            pPrecioTotal.setAttribute('style', 'display:none'),
+            btnFinalizar.setAttribute('style', 'display:none'),
+            btnVaciarCarrito.setAttribute('style', 'display:none'),
+            contItemsCarrito.appendChild(mensajeCarritoVacio)
+        ) : (
+            pPrecioTotal.removeAttribute('style', 'display:none'),
+            btnFinalizar.removeAttribute('style', 'display:none'),
+            btnVaciarCarrito.removeAttribute('style', 'display:none')
+        )
+}
+
+function vaciarCarrito() {
+    carrito = [];
+    mostrarCarrito();
+    verificarEstadoCarrito();
+    localStorage.clear();
+}
+
+btnVaciarCarrito.addEventListener('click', vaciarCarrito);
+
+
+//Local Storage //
+
+
+function guardarCarritoEnLocalStorage() {
+    miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+function cargarCarritoDeLocalStorage() {
+    if (miLocalStorage.getItem('carrito') !== null) {
+        carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+        mostrarCarrito()
+    }
+}
+
+
+// Finalizar compra //
+
+
+const main = document.querySelector('#main');
+const btnFinalizar = document.querySelector('#btn-finalizar');
+const productosComprados = document.querySelector('#itemsCarrito');
+const aside = document.querySelector('#aside');
+const subtitulo = document.querySelector('.subtSeccion');
+const secResumenCompra = document.querySelector('#secResumenCompra');
+const contenedorCompraFinalizada = document.querySelector('#contenedorCompraFinalizada');
+
+btnFinalizar.onclick = () => {
+    location.href = './pages/finalizarCompra.html';
+}
+
+
+// Barra de busqueda de productos //
+
+
+barraBuscar.addEventListener('input', () => {
+    // Busca y muestra los productos escritos en la barra de busqueda
+    let prodFiltrados;
+    barraBuscar.value === '' ?
+        mostrarProductos(productos) :
+        (
+            prodFiltrados = productos.filter(elemento => elemento.nombre.includes(barraBuscar.value.toUpperCase())),
+            mostrarProductos(prodFiltrados)
+        )
+})
+
+
+/// Filtros por checkbox ///
+
+
+// Busca y muestra los productos seleccionados en los checkbox al darle click en el boton Aplicar
+
+let btnFiltro = document.getElementById("btn-filtrar");
+
+function obtenerValoresCheckbox() {
+    let valoresCheckbox = new Array();
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+    checkboxes.forEach((elem) => {
+        elem.checked && valoresCheckbox.push(elem.value);
+    });
+    return valoresCheckbox;
+}
+
+btnFiltro.onclick = (e) => {
+    e.preventDefault();
+    let seleccionados = obtenerValoresCheckbox();
+    if (seleccionados.length == 0) {
+        mostrarProductos(productos);
+    } else {
+        prodCheckeados = new Array();
+        for (let i = 0; i < seleccionados.length; i++) {
+            for (let p = 0; p < productos.length; p++) {
+                seleccionados[i] == productos[p].categoria && prodCheckeados.push(productos[p])
+            }
+        }
+        mostrarProductos(prodCheckeados);
+    }
+};
+
+
+//// Ir al inicio cuando hay scrolling vertical ////
+
+
+botonToTop = document.getElementById("toTop");
+
+window.onscroll = function () {
+    detectarScrollVertical()
+};
+botonToTop.onclick = function () {
+    irArriba()
+};
+
+function detectarScrollVertical() {
+    (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? botonToTop.style.display = "block": botonToTop.style.display = "none";
+}
+
+function irArriba() {
+    document.body.scrollTop = 0; // Safari
+    document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
+}
+
+// PROGRAMA //
+
+actualizarContadorCarrito();
+cargarCarritoDeLocalStorage();
+mostrarProductos(productos);
+verificarEstadoCarrito();

@@ -1,19 +1,19 @@
+// DOM //
+
 const confirmarCompra = document.querySelector('#confirmarCompra');
 const nombreCliente = document.querySelector('#nombreCliente');
 const apellidoCliente = document.querySelector('#apellidoCliente');
 const emailCliente = document.querySelector('#emailCliente');
 const wrapperCompraFinal = document.querySelector('#wrapperCompraFinal');
 
-// FUNCIONES //
-
+//FUNCIONES //
 
 function cargarCarritoDeLocalStorage() {
-    if (miLocalStorage.getItem('carrito') !== null) {
-        carrito = JSON.parse(miLocalStorage.getItem('carrito'));
-    }
+    carrito = JSON.parse(miLocalStorage.getItem('carrito')) || []
 }
 
 function mostrarResumenCompra() {
+    // Muestra un resumen del carrito seleccionado en el paso anterior
     const carritoSinDuplicados = [...new Set(carrito)];
     carritoSinDuplicados.forEach((item) => {
         const itemFinal = productos.filter((prod) => {
@@ -37,22 +37,28 @@ function mostrarResumenCompra() {
 }
 
 function chequearLocalStorage() {
-    if (miLocalStorage.getItem('carrito') == null) {
-        wrapperCompraFinal.innerHTML = ''
-        wrapperCompraFinal.style.height = "30vh";
-        let contMensajeCompra = document.createElement('div');
-        contMensajeCompra.setAttribute('class', 'contMensajeCompra');
-        let mensajeCompra = document.createElement('p');
-        mensajeCompra.setAttribute('class', 'mensajeCompra');
-        mensajeCompra.innerText = "Vuelva al inicio para comprar"
-        wrapperCompraFinal.appendChild(contMensajeCompra);
-        contMensajeCompra.appendChild(mensajeCompra);
-    }
+    // Evita que se muestre el resumen de compra vacío al refrescar la página despues de una compra
+    let contMensajeCompra;
+    let mensajeCompra;
+    miLocalStorage.getItem('carrito') == null &&
+        (
+            wrapperCompraFinal.innerHTML = '',
+            wrapperCompraFinal.style.height = "80vh",
+            contMensajeCompra = document.createElement('div'),
+            contMensajeCompra.setAttribute('class', 'contMensajeCompra'),
+            mensajeCompra = document.createElement('p'),
+            mensajeCompra.setAttribute('class', 'mensajeCompra'),
+            mensajeCompra.innerText = "Vuelva al inicio para comprar",
+            wrapperCompraFinal.appendChild(contMensajeCompra),
+            contMensajeCompra.appendChild(mensajeCompra)
+        )
 }
 
 function finalizarCompra() {
+    // animacion por el procesamiento de la compra y muestra un mensaje de la compra finalizada
+    mostrarAnimacionCompra();
     wrapperCompraFinal.innerHTML = ''
-    wrapperCompraFinal.style.height = "30vh";
+    wrapperCompraFinal.style.height = "80vh";
     let contMensajeCompra = document.createElement('div');
     contMensajeCompra.setAttribute('class', 'contMensajeCompra');
     let mensajeCompra = document.createElement('p');
@@ -64,8 +70,18 @@ function finalizarCompra() {
     localStorage.clear();
 }
 
-// PROGRAMA //
+function mostrarAnimacionCompra() {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Procesando Compra',
+        showConfirmButton: false,
+        timer: 1500
+    })
+}
+
+//PROGRAMA //
 
 cargarCarritoDeLocalStorage()
-chequearLocalStorage()
 mostrarResumenCompra()
+chequearLocalStorage()
