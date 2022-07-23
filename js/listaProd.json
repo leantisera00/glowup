@@ -1,0 +1,143 @@
+
+[
+    {
+        "idprod": 1000,
+        "nombre": "Remera Nike Impossible Azul Hombre",
+        "categoria": "Remera_Nike_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/remera_nike_azul.jpg"
+    },
+    {
+        "idprod": 1001,
+        "nombre": "Remera Nike negra franja  blanca Hombre",
+        "categoria": "Remera_Nike_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/remera_nike_cian_franjanegra.png"
+    },
+    {
+        "idprod": 1002,
+        "nombre": "Remera Nike Cian franja  negra Hombre",
+        "categoria": "Remera_Nike_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/remera_nike_gris_franjablanca.png"
+    },
+    {
+        "idprod": 1003,
+        "nombre": "Remera Nike negra Hombre",
+        "categoria": "Remera_Nike_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/remera_nike_negra.jpg"
+    },
+    {
+        "idprod": 2000,
+        "nombre": "Remera Adidas Rosa Hombre",
+        "categoria": "Remera_Adidas_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/Remera_Adidas_rosa.png"
+    },
+    {
+        "idprod": 2001,
+        "nombre": "Remera Adidas Gris Hombre",
+        "categoria": "Remera_Adidas_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/Remera_Adidas_gris.png"
+    },
+    {
+        "idprod": 2002,
+        "nombre": "Remera Adidas Blanca Hombre",
+        "categoria": "Remera_Adidas_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/Remera_Adidas_blanca.jpg"
+    },
+    {
+        "idprod": 2003,
+        "nombre": "Remera Adidas Amarilla logo negro Hombre",
+        "categoria": "Remera_Adidas_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/Remera_Adidas_amarilla_logonegro.png"
+    },
+    {
+        "idprod": 2004,
+        "nombre": "Remera Adidas Amarilla logo blanco Hombre",
+        "categoria": "Remera_Adidas_Hombre",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/remera_adidas_amarilla.jpg"
+    },
+    {
+        "idprod": 3000,
+        "nombre": "Babucha Nike frisada Negra franja lateral gris",
+        "categoria": "Babucha_Nike",
+        "precio": 3000,
+        "imagen": "./img/Productos/babuchas/babucha_nike_negra.jpg"
+    },
+    {
+        "idprod": 3001,
+        "nombre": "Babucha Nike frisada Gris franja lateral negro",
+        "categoria": "Babucha_Nike",
+        "precio": 3000,
+        "imagen": "./img/Productos/babuchas/babucha_nike_gris.png"
+    },
+    {
+        "idprod": 4000,
+        "nombre": "Buzo Adidas frisado con capucha gris",
+        "categoria": "Buzo_Adidas",
+        "precio": 4500,
+        "imagen": "./img/Productos/buzos/buzo_adidas_gris.png"
+    },
+    {
+        "idprod": 4001,
+        "nombre": "Buzo Adidas frisado con capucha negro",
+        "categoria": "Buzo_Adidas",
+        "precio": 4500,
+        "imagen": "./img/Productos/buzos/buzo_adidas_negro.png"
+    },
+    {
+        "idprod": 5000,
+        "nombre": "Remera Nike Impossible Mujer",
+        "categoria": "Remera_Nike_Mujer",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/nike_impossible_roja.png"
+    },
+    {
+        "idprod": 5001,
+        "nombre": "Remera Nike Retro Gris Mujer",
+        "categoria": "Remera_Nike_Mujer",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/retro_gris.png"
+    },
+    {
+        "idprod": 5002,
+        "nombre": "Remera Nike Retro Rosa Mujer",
+        "categoria": "Remera_Nike_Mujer",
+        "precio": 1800,
+        "imagen": "./img/Productos/remeras/retro_rosa.png"
+    },
+    {
+        "idprod": 6000,
+        "nombre": "Remera Climalite Rosa Mujer",
+        "categoria": "Remera_Adidas_Mujer",
+        "precio": 2100,
+        "imagen": "./img/Productos/remeras/climalite_rosa_intermedio.png"
+    },
+    {
+        "idprod": 6001,
+        "nombre": "Remera Climalite Rosa Claro Mujer",
+        "categoria": "Remera_Adidas_Mujer",
+        "precio": 2100,
+        "imagen": "./img/Productos/remeras/climalite_rosaclaro.png"
+    },
+    {
+        "idprod": 7000,
+        "nombre": "Calza Gris Jaspeada Mujer",
+        "categoria": "calza_nike_mujer",
+        "precio": 2500,
+        "imagen": "./img/Productos/calzas/calza_gris_jaspeada.png"
+    },
+    {
+        "idprod": 7001,
+        "nombre": "Calza Abstract Mujer",
+        "categoria": "calza_nike_mujer",
+        "precio": 2500,
+        "imagen": "./img/Productos/calzas/calza_abstract.png"
+    }
+]

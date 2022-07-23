@@ -1,4 +1,4 @@
-// DOM //
+/////////////////////////// DOM ///////////////////////////
 
 const confirmarCompra = document.querySelector('#confirmarCompra');
 const nombreCliente = document.querySelector('#nombreCliente');
@@ -6,13 +6,14 @@ const apellidoCliente = document.querySelector('#apellidoCliente');
 const emailCliente = document.querySelector('#emailCliente');
 const wrapperCompraFinal = document.querySelector('#wrapperCompraFinal');
 
-//FUNCIONES //
+/////////////////////////// FUNCIONES ///////////////////////////
 
 function cargarCarritoDeLocalStorage() {
     carrito = JSON.parse(miLocalStorage.getItem('carrito')) || []
 }
 
-function mostrarResumenCompra() {
+async function mostrarResumenCompra() {
+    let productos = await traerProductos();
     // Muestra un resumen del carrito seleccionado en el paso anterior
     const carritoSinDuplicados = [...new Set(carrito)];
     carritoSinDuplicados.forEach((item) => {
@@ -25,19 +26,28 @@ function mostrarResumenCompra() {
         let div = document.createElement('div')
         div.setAttribute('class', 'resumenCarrito')
         div.innerHTML = `
-                        <img src='.${itemFinal[0].imagen}' alt=${itemFinal[0].nombre} class="imgProdResumen">
+                        <img src='${itemFinal[0].imagen}' alt=${itemFinal[0].nombre} class="imgProdResumen">
                         <p class="nombreProdResumen">${itemFinal[0].nombre}</p>
                         <p class="cantProdResumen">Cantidad ${unidadesProd}</p>
                         <p class="precioProdResumen">P.U. $${itemFinal[0].precio}</p>
                         `
         secResumenCompra.append(div);
     });
-    precioFinalResumen.textContent = calcularTotal();
+
+    const Total =
+        carrito.reduce((total, item) => {
+            const miItem = productos.filter((items) => {
+                return items.idprod === parseInt(item);
+            });
+            return total + miItem[0].precio;
+        }, 0);
+
+    precioFinalResumen.textContent = Total;
 
 }
 
 function chequearLocalStorage() {
-    // Evita que se muestre el resumen de compra vacío al refrescar la página despues de una compra
+    // Para prevenir que se muestre el resumen de compra vacío al refrescar la página luego de una compra
     let contMensajeCompra;
     let mensajeCompra;
     miLocalStorage.getItem('carrito') == null &&
@@ -55,7 +65,7 @@ function chequearLocalStorage() {
 }
 
 function finalizarCompra() {
-    // animacion por el procesamiento de la compra y muestra un mensaje de la compra finalizada
+    // Muestra una animacion por el procesamiento de la compra y despliega un mensaje de la compra finalizada
     mostrarAnimacionCompra();
     wrapperCompraFinal.innerHTML = ''
     wrapperCompraFinal.style.height = "80vh";
@@ -80,8 +90,9 @@ function mostrarAnimacionCompra() {
     })
 }
 
-//PROGRAMA //
+//////////////////////////////// PROGRAMA ////////////////////////////////
 
+traerProductos()
 cargarCarritoDeLocalStorage()
 mostrarResumenCompra()
 chequearLocalStorage()

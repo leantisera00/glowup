@@ -4,10 +4,10 @@
 //// Mostrar todos los productos ////
 
 
-function mostrarProductos(listaProd) {
+function mostrarProductos(prd) {
     // Se crean contenedores con la info de cada producto
     mainSec.innerHTML = ""
-    listaProd.forEach(prod => {
+    prd.forEach(prod => {
         let contenedor = document.createElement("article");
         contenedor.classList.add('contProducto');
         contenedor.innerHTML = `
@@ -35,7 +35,8 @@ function mostrarProductos(listaProd) {
 //// Carrito de compras ////
 
 
-function agregarAlCarrito(e) {
+async function agregarAlCarrito(e) {
+    let productos = await traerProductos();
     // Para agregar un producto al carro, se filtra por el valor del  prodID, que se asigno a cada botón de Comprar
     let prodElegido = productos.filter(prd => prd.idprod == e.target.getAttribute('prodID'));
     let nombreProdElegido = prodElegido[0].nombre;
@@ -60,7 +61,8 @@ function mostrarToast(prod) {
     }).showToast();
 }
 
-function mostrarCarrito() {
+async function mostrarCarrito() {
+    let productos = await traerProductos();
     contItemsCarrito.textContent = '';
     // Copia del array carrito y filtro duplicados, sumando cantidades a igual producto seleccionado
     const carritoSinDuplicados = [...new Set(carrito)];
@@ -88,7 +90,16 @@ function mostrarCarrito() {
         contItemsCarrito.appendChild(div);
     })
     actualizarContadorCarrito()
-    precioTotal.textContent = calcularTotal()
+
+    const Total =
+        carrito.reduce((total, item) => {
+            const miItem = productos.filter((items) => {
+                return items.idprod === parseInt(item);
+            });
+            return total + miItem[0].precio;
+        }, 0);
+
+    precioTotal.textContent = Total
 }
 
 function borrarItemCarrito(e) {
@@ -159,15 +170,16 @@ const secResumenCompra = document.querySelector('#secResumenCompra');
 const contenedorCompraFinalizada = document.querySelector('#contenedorCompraFinalizada');
 
 btnFinalizar.onclick = () => {
-    location.href = './pages/finalizarCompra.html';
+    location.href = './finalizarCompra.html';
 }
 
 
 // Barra de busqueda de productos //
 
 
-barraBuscar.addEventListener('input', () => {
+barraBuscar.addEventListener('input', async () => {
     // Busca y muestra los productos escritos en la barra de busqueda
+    let productos = await traerProductos();
     let prodFiltrados;
     barraBuscar.value === '' ?
         mostrarProductos(productos) :
@@ -194,8 +206,9 @@ function obtenerValoresCheckbox() {
     return valoresCheckbox;
 }
 
-btnFiltro.onclick = (e) => {
+btnFiltro.onclick = async (e) => {
     e.preventDefault();
+    let productos = await traerProductos();
     let seleccionados = obtenerValoresCheckbox();
     if (seleccionados.length == 0) {
         mostrarProductos(productos);
@@ -216,15 +229,11 @@ btnFiltro.onclick = (e) => {
 
 botonToTop = document.getElementById("toTop");
 
-window.onscroll = function () {
-    detectarScrollVertical()
-};
-botonToTop.onclick = function () {
-    irArriba()
-};
+window.onscroll = function () { detectarScrollVertical() };
+botonToTop.onclick = function () { irArriba() };
 
 function detectarScrollVertical() {
-    (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? botonToTop.style.display = "block": botonToTop.style.display = "none";
+    (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? botonToTop.style.display = "block" : botonToTop.style.display = "none";
 }
 
 function irArriba() {
@@ -234,7 +243,7 @@ function irArriba() {
 
 // PROGRAMA //
 
+traerYmostrarProductos()
 actualizarContadorCarrito();
 cargarCarritoDeLocalStorage();
-mostrarProductos(productos);
 verificarEstadoCarrito();
